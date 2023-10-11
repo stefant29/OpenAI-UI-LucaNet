@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { read, utils, writeFile } from 'xlsx';
-import { qa_model } from './qa.model';
+import { RfiRfpQuestion } from './RfiRfpQuestion.model';
 import { map } from 'rxjs';
 import { OpenAiServiceService } from './openAiService/open-ai-service.service';
 
@@ -10,7 +10,7 @@ import { OpenAiServiceService } from './openAiService/open-ai-service.service';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    movies: qa_model[] = [];
+    movies: RfiRfpQuestion[] = [];
     openAiService: OpenAiServiceService;
 
     constructor(openAiService: OpenAiServiceService) {
@@ -29,7 +29,7 @@ export class AppComponent {
                 console.log(wb, sheets);
 
                 if (sheets.length) {
-                    const rows = utils.sheet_to_json<qa_model>(wb.Sheets[sheets[0]]);
+                    const rows = utils.sheet_to_json<RfiRfpQuestion>(wb.Sheets[sheets[0]]);
                     console.log(rows);
                     this.movies = rows;
                 }
@@ -49,19 +49,19 @@ export class AppComponent {
         const ws: any = utils.json_to_sheet([]);
         utils.sheet_add_aoa(ws, headings);
         utils.sheet_add_json(ws, 
-            this.movies.map((a:qa_model) => ({ question: a.question, answer: a.answer}))
+            this.movies.map((a:RfiRfpQuestion) => ({ question: a.question, answer: a.answer}))
             , { origin: 'A2', skipHeader: true });
         utils.book_append_sheet(wb, ws, 'Report');
         writeFile(wb, 'Movie Report.xlsx');
     }
 
     addRowStart() {
-        this.movies.unshift(new qa_model());
+        this.movies.unshift(new RfiRfpQuestion());
     }
 
     generateResponses() {
         this.movies.map(
-            (question: qa_model) => {
+            (question: RfiRfpQuestion) => {
                 this.openAiService.getData(question).subscribe(
                     result => {
                         console.log("result for ",question,"is: ",result);

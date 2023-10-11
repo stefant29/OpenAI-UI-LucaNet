@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { qa_model } from '../qa.model';
+import { RfiRfpQuestion } from '../RfiRfpQuestion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +13,10 @@ export class OpenAiServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getData(model: qa_model): Observable<qa_model> {
+  getData(model: RfiRfpQuestion): Observable<RfiRfpQuestion> {
 
     // TODO: send the model to the api
 
-    return this.http.get<qa_model>(this.apiUrl);
+    return this.http.get<RfiRfpQuestion>(this.apiUrl);
   }
 }

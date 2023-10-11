@@ -33,7 +33,9 @@
                 </thead>
                 <tbody>
                     <ng-container *ngIf="movies.length; else elseBlock">
-                        <tr *ngFor="let movie of movies; let i = index">
+                        <tr *ngFor="let movie of movies; let i = index" 
+                            [class]="'correct-' + i"
+                        >
                             <th scope="row">{{ i + 1 }}</th>
                             <td>
                                 <input type="text" [(ngModel)]="movie.question"/>

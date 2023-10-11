@@ -1,5 +1,5 @@
 
-export default class qa_model {
+export class RfiRfpQuestion {
     question: string;
     answer: string;
     category: string;
