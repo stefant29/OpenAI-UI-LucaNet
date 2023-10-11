@@ -1,7 +1,6 @@
 <div class="top-banner">
-    <a href="https://ouo.io/" target="_blank">
-        WIZARD
-    <span>Go</span></a>
+    <div>RFP Wizard</div>
+    <i class="fa fa-magic pl-2"></i>
 </div>  
   
 
@@ -11,16 +10,24 @@
     <div class="row mb-2 mt-5">
         <div class="col-lg-8 offset-2">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="input-group">
                         <div class="custom-file">
                             <input type="file" name="file" class="custom-file-input" id="inputGroupFile" required (change)="handleImport($event)"
                                 accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                             <label class="custom-file-label" for="inputGroupFile">
-                                Choose file
+                                Upload 
                             </label>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-8">
+                    <button (click)="handleExport()" class="btn btn-primary float-right ml-1" [disabled]="movies.length == 0">
+                        Export <i class="fa fa-download"></i>
+                    </button>
+                    <button (click)="generateResponses()" class="btn btn-primary float-right" >
+                        Do your magic! <i class="fa fa-magic"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -28,69 +35,42 @@
 
     <div class="row">
         <div class="col-lg-8 offset-2">
-            <table class="table">
+            <table class="table table-striped"  #myElement>
                 <thead>
                     <tr>
-                        <th scope="col">
+                        <th scope="col" style="width: 5%;">
                             <button (click)="addRowStart()" class="btn btn-primary float-right">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </th>
                         <th scope="col">Question</th>
                         <th scope="col">Answer</th>
-                        <th scope="col">Category</th>
+                        <!-- <th scope="col">Category</th>
                         <th scope="col">Sub-Category</th>
-                        <th scope="col">Accuracy</th>
+                        <th scope="col">Accuracy</th> -->
                     </tr>
                 </thead>
                 <tbody>
-                    <ng-container *ngIf="movies.length; else elseBlock">
-                        <tr *ngFor="let movie of movies; let i = index" 
-                            [class]="'correct-' + (i / 3 + 1 | round)"
-                        >
+                    <ng-container *ngIf="movies.length">
+                        <tr *ngFor="let movie of movies; let i = index" >
                             <th scope="row">{{ i }}</th>
                             <td>
-                                <input type="text" [(ngModel)]="movie.question"/>
+                                <textarea id="question-{{i}}" (ngModelChange)="onTextareaChange($event)"  class="question" type="text" [(ngModel)]="movie.question"></textarea>
                             </td>
                             <td>
-                                <input type="text" [(ngModel)]="movie.answer"/>
+                                <textarea id="response-{{i}}" (ngModelChange)="onTextareaChange($event)"  class="question" type="text" [(ngModel)]="movie.answer"></textarea>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <input type="text" [(ngModel)]="movie.category"/>
                             </td>
                             <td>
                                 <input type="text" [(ngModel)]="movie.subCategory"/>
                             </td>
-                            <td><span class="badge bg-warning text-dark">{{ i + 1 }}</span></td>
+                            <td><span class="badge bg-warning text-dark">{{ i + 1 }}</span></td> -->
                         </tr>
                     </ng-container>
-                    <ng-template #elseBlock>
-                        <tr>
-                            <td colspan="5" class="text-center"></td>
-                        </tr>
-                    </ng-template>
                 </tbody>
             </table>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12 offset-3">
-            <button (click)="generateResponses()" class="btn btn-primary">
-                Generate <i class="fa fa-puzzle-piece"></i>
-            </button>
-        </div>
-    </div>
-
-    <br/>
-
-    <div class="row">
-        <div class="col-sm-12 offset-3">
-            <div class="col-md-4">
-                <button (click)="handleExport()" class="btn btn-primary">
-                    Export <i class="fa fa-download"></i>
-                </button>
-            </div>
         </div>
     </div>
 </main>

@@ -152,7 +152,16 @@
 .top-banner {
   margin-bottom: 30px;
   text-align: center;
-  background-color: #ea4c4c;
+  background-color: #3d6438;
+  color: #fff;
+  height: 3rem;
+  margin: auto;
+  padding: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
 }
 
 .top-banner a, .top-banner span {
@@ -177,4 +186,42 @@
 
 .top-banner a:hover {
   color: #fff9e0;
+}
+
+
+
+input {
+  width: 100%
+}
+
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #e5f8e5;
+}
+
+
+
+.btn-primary {
+  color: #fff;
+  background-color: #a2c4a2;
+  border-color: #a2c4a2;
+}
+.btn-primary:not([disabled]):hover {
+  color: #fff;
+  background-color: #8aa98a;
+  border-color: #a2c4a2;
+}
+
+textarea.question {
+
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  width: 100%;
+}
+
+.table-striped tbody tr:nth-of-type(even) textarea.question {
+  border: 0.5px solid #e5f8e5;
+  outline: 0.5px solid #e5f8e5;
 }

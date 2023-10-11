@@ -9,14 +9,11 @@ import { RfiRfpQuestion } from '../RfiRfpQuestion.model';
 export class OpenAiServiceService {
 
   // TODO: Replace with our backend service that calls openAi API
-  private apiUrl = 'https://api.example.com/endpoint';
+  private apiUrl = 'http://localhost:3000/get-answer';
 
   constructor(private http: HttpClient) { }
 
   getData(model: RfiRfpQuestion): Observable<RfiRfpQuestion> {
-
-    // TODO: send the model to the api
-
-    return this.http.get<RfiRfpQuestion>(this.apiUrl);
+    return this.http.post<RfiRfpQuestion>(this.apiUrl, model);
   }
 }
