@@ -1,21 +1,33 @@
+<div class="top-banner">
+    <a href="https://ouo.io/" target="_blank">
+        WIZARD
+    <span>Go</span></a>
+</div>  
+  
+
+  
+
 <main>
     <div class="row mb-2 mt-5">
-        <div class="col-sm-6 offset-3">
+        <div class="col-lg-8 offset-2">
             <div class="row">
                 <div class="col-md-6">
                     <div class="input-group">
                         <div class="custom-file">
                             <input type="file" name="file" class="custom-file-input" id="inputGroupFile" required (change)="handleImport($event)"
                                 accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                            <label class="custom-file-label" for="inputGroupFile">Choose file</label>
+                            <label class="custom-file-label" for="inputGroupFile">
+                                Choose file
+                            </label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="row">
-        <div class="col-sm-6 offset-3">
+        <div class="col-lg-8 offset-2">
             <table class="table">
                 <thead>
                     <tr>
@@ -34,9 +46,9 @@
                 <tbody>
                     <ng-container *ngIf="movies.length; else elseBlock">
                         <tr *ngFor="let movie of movies; let i = index" 
-                            [class]="'correct-' + i"
+                            [class]="'correct-' + (i / 3 + 1 | round)"
                         >
-                            <th scope="row">{{ i + 1 }}</th>
+                            <th scope="row">{{ i }}</th>
                             <td>
                                 <input type="text" [(ngModel)]="movie.question"/>
                             </td>

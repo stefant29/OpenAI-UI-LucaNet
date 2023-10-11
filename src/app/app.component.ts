@@ -14,6 +14,9 @@ export class AppComponent {
     openAiService: OpenAiServiceService;
 
     constructor(openAiService: OpenAiServiceService) {
+        for (let i = 0; i < 10; i++) {
+            this.movies.push(new RfiRfpQuestion());
+        }
         this.openAiService = openAiService;
     }
 
